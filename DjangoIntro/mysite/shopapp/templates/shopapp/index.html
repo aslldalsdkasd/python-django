@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>INDEX</title>
+</head>
+<body>
+<h1> hello word </h1>
+<div>
+    {% lorem 1 p random %}
+</div>
+
+<div>
+    <ul>
+        {% for number in numbers %}
+        <li>{{number|add:'2'}}</li>
+        {% empty %}
+        NO NUMBER
+        {% endfor %}
+    </ul>
+</div>
+<div>
+    <ul>
+        {% for name, price in list_things%}
+        <li> {{ name|length }} symbols {{name}} for $ {{ price|add:"200" }}</li>
+        {% empty %}
+        NO PRODUCTS
+        {% endfor %}
+    </ul>
+
+</div>
+<div> {% now "H:i" %}</div>
+
+
+</body>
+</html>

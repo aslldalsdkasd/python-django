@@ -1,0 +1,21 @@
+{% extends 'shopapp/base.html'%}
+
+{% block title%}
+archived
+{% endblock %}
+
+{% block body%}
+ <h1> Are you sure you want archived?</h1>
+<br>
+<div>
+    <a href="{% url 'shopapp:products_list'%}">BACK</a>
+</div>
+<br>
+<div>
+    <form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit"> archived </button>
+</form>
+</div>
+{% endblock %}

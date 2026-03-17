@@ -1,0 +1,100 @@
+from timeit import default_timer
+
+from django.http import HttpResponse, HttpRequest, HttpResponseRedirect, JsonResponse, HttpResponseBadRequest
+from django.shortcuts import render, reverse
+from django.urls import reverse_lazy
+from django.views import View
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+
+from .models import Product, Order
+
+
+class ShopIndexView(View):
+    def get(self, request: HttpRequest) -> HttpResponse:
+        products = [
+            ('Laptop', 1999),
+            ('Desktop', 2999),
+            ('Smartphone', 999),
+        ]
+        context = {
+            "time_running": default_timer(),
+            "products": products,
+        }
+        return render(request, 'shopapp/shop-index.html', context=context)
+
+
+class ProductDetailsView(DetailView):
+    template_name = "shopapp/products-details.html"
+    model = Product
+    context_object_name = "product"
+
+
+class ProductsListView(ListView):
+    template_name = "shopapp/products-list.html"
+    # model = Product
+    context_object_name = "products"
+    queryset = Product.objects.filter(archived=False)
+
+
+class ProductCreateView(CreateView):
+    model = Product
+    fields = "name", "price", "description", "discount"
+    success_url = reverse_lazy("shopapp:products_list")
+
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    fields = "name", "price", "description", "discount"
+    template_name_suffix = "_update_form"
+
+    def get_success_url(self):
+        return reverse(
+            "shopapp:product_details",
+            kwargs={"pk": self.object.pk},
+        )
+
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    success_url = reverse_lazy("shopapp:products_list")
+
+    def form_valid(self, form):
+        success_url = self.get_success_url()
+        self.object.archived = True
+        self.object.save()
+        return HttpResponseRedirect(success_url)
+
+
+class OrdersListView(LoginRequiredMixin, ListView):
+    queryset = (
+        Order.objects
+        .select_related("user")
+        .prefetch_related("products")
+    )
+
+
+class OrderDetailView(PermissionRequiredMixin, DetailView):
+    permission_required = "shopapp.view_order"
+    queryset = (
+        Order.objects
+        .select_related("user")
+        .prefetch_related("products")
+    )
+
+class OrderExportView(View):
+    def get(self, request: HttpRequest):
+        if not self.request.user.is_staff:
+            return HttpResponseBadRequest('нет прав')
+        orders = Order.objects.select_related("user").prefetch_related("products").all()
+        orders_data = []
+        for order in orders:
+            order_data = {
+                'id': order.pk,
+                'delivery_address': order.delivery_address,
+                'promocode': order.promocode,
+                'user_id': order.user.id,
+                'products': [product.id for product in order.products.all()]
+            }
+            orders_data.append(order_data)
+        return JsonResponse({'orders': orders_data})

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>site</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+                background-color: #f6f7f9;
+                
+            }
+            * {
+                font-family: 'Roboto', sans-serif;
+            }
+            
+            header {
+                height: 100px;
+                padding: 0 40px;
+            }
+            .first-block {
+                height: 300px;
+            }
+            section {
+                padding: 40px;
+            }
+            footer {
+                padding: 40px;
+            }
+            .fixed-container {
+                max-width: 1100px;
+                height: 100%;
+                margin-left: auto;
+                margin-right: auto;
+                
+            }
+            header > div {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .first-block > div {
+                display: flex;
+                height: 400px;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                background-image: url(img/man.png);
+                background-size: contain;
+                background-position: right center;
+                background-repeat: no-repeat;
+                margin-bottom: 5px;
+            }
+            .services {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 30px;
+            }
+            .services > div {
+                width: 200px;
+            }
+            .services img {
+                width: 150px;
+                height: 150px;
+            }
+            .dark-button {
+                border: 1px solid #3d52fe;
+                background-color: #3d52fe;
+                color: white;
+            }
+            .price-info {
+                background-color: #3d52fe;
+                color: white;
+            }
+            .light-button {
+                border: 1px solid black;
+                background-color: transparent;
+            }
+
+            button {
+                padding: 10px 30px;
+                cursor: pointer;
+                border-radius: 5px;
+
+            }
+            a {
+                text-decoration: none;
+                color: black;
+                
+            }
+            a:hover {
+                text-decoration: underline;
+                
+            }
+            .heder-link a{
+                margin-right: 30px;
+            }
+            .first-block button {
+                margin-top: 20px;
+            }
+            .works img{
+                width: 350px;
+                border-radius: 10px;
+                border: 1px solid black;
+            }
+            .works {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 30px;
+            }
+            .works > div {
+                width: 300px;
+            }
+            .price-info h2 {
+                width: 50%;
+            }
+            .price-info p {
+                width: 50%;
+            }
+           
+           
+            
+            .foter {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+            }
+            .foter > div {
+                display: flex;
+                flex-direction: column;
+                
+            }
+            .contact {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                
+            }
+            .button-foter {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+                
+
+            }
+            .small-button button {
+            width: 10px;
+            height: 10px;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            }   
+            .foter-link {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+            }
+            .contact p {
+                margin: 0;
+            }
+            .small-button {
+                display: flex;
+                gap: 10px;
+                margin-top: 10px;
+            }
+            .popup-container {
+                background-color: #000000b3;
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                display: none;
+                justify-content: center;
+                align-items: center;
+                
+            }
+            .popup {
+                background-color: white;
+                width: 300px;
+                height: 300px;
+                padding: 30px;
+                border-radius: 10px;
+            }
+            .reg-form {
+                height: 150px;
+            }
+            button img {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+            background-color: #f6f7f9
+            }
+            .small-button img {
+                object-fit: contain;
+                width: 15px;
+                height: 15px;
+                object-position: center;
+                background-color: #f6f7f9
+                
+            }
+            .small-button button {
+                background-color: #f6f7f9;
+                display: flex;
+                justify-content: space-between;
+                padding: 20px 20px;
+               
+            }
+            .foter > div button {
+               align-self: center;
+            }
+
+            .popup > div {
+                margin-top: 20px;
+            }
+            .popup > button {
+                margin-top: 20px;
+                margin-left: 50px;
+                display: flex;
+                align-self: center;
+            }
+            
+            
+            
+        
+        </style>
+        <script>
+            document.addEventListener("DOMContentLoaded", function(){
+                var container = 
+            document.querySelector('.popup-container');
+                var popupButtons = 
+            document.querySelectorAll('.open-popup');
+                for (let i = 0; i < popupButtons.length; i++) {
+                    popupButtons[i].addEventListener('click', function(){
+                        container.style.display = 'flex';
+                });
+            }
+
+
+            container.addEventListener('click', function(event){
+                if(event.target == container) {
+                    container.style.display = 'none';
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div class="popup-container">
+            <form class="popup">
+                <h2>Заказ звонка</h2>
+                <div>
+                    <input type="text" id="name" name="name" placeholder="Введите свое имя" class="reg-form__input">
+                </div>
+                <div>
+                    <input type="text" id="email" name="email" placeholder="Введите свою почту" class="reg-form__input">
+                </div>
+                <button class="submit-button">Отправить</button>
+            </form>
+        </div>
+        <header>
+            <div class="fixed-container">
+                <div class="heder-link">
+                    <a href="#">Услуги</a>
+                    <a href="#">Портфолио</a>
+                    <a href="#">Стоимость</a>
+                </div>
+                <div>
+                    <span>+7 909 999-55-44</span>
+                    <button class="light-button open-popup">Заказать звонок</button>
+                </div>
+            </div>
+        </header>
+        <section class="first-block">
+            <div class="fixed-container">
+                <h1>Дмитрий Алексеев</h1>
+                Фронтенд разработка и веб-верстальщик
+                <button class="dark-button open-popup">Узнать больше</button>
+            </div>
+        </section>
+        <section>
+            <div class="fixed-container">
+                <h2>Что я делаю</h2>
+                <div class="services">
+                    <div>
+                        <img src="img/1.png" alt="">
+                        Вёрстка лэндинг-страниц и сайтов любой сложности
+                    </div>
+                    <div>
+                        <img src="img/2.png" alt="">
+                        Адаптивная вёрстка под все браузеры и устройства
+                    </div>
+                    <div>
+                        <img src="img/3.png" alt="">
+                        Frontend-разработка и программирование
+                    </div>
+                    <div>
+                        <img src="img/4.png" alt="">
+                        Исправление и доработка существующей вёрстки
+                    </div>
+                </div>
+                <button class="light-button open-popup">Узнать стоимость</button>
+            </div>
+        </section>
+        <section>
+            <div class="fixed-container">
+                <h2>Примеры работ</h2>
+                    <div class="works">
+                <div>
+                    <img src="img/e1.png" alt="">
+                    Сайт психолога Веры Антоновой
+                </div>
+                <div>
+                    <img src="img/e2.png" alt="">
+                    Сайт магазин детской одежды
+                </div>
+                <div>
+                    <img src="img/e3.png" alt="">
+                    Сайт магазина "Рыболов"
+                </div>
+                </div>
+            </div>
+            <button class="light-button open-popup">Заказать проект</button>
+        </section>
+        <section class="price-info">
+            <div class="fixed-container">
+                <h2>Адаптивная вёрстка под все устройства и браузеры от 1000 р. всего за 4 часа.*</h2>
+                <p>*Срок и стоимость могут отличаться от заявленных и рассчитываются индивидуально, в зависимости от сложных задач.</p>
+            </div>
+        </section>
+        <footer>
+            <div class="foter fixed-container">
+                <div class="foter-link">
+                    <a href="#">Услуги</a>
+                    <a href="#">Портфолио</a>
+                    <a href="#">Стоимость</a>
+                </div>
+                <div class="contact">
+                    <p>dmitry@alekseev.com</p>
+                    <p>+7 (499) 995 77 55</p>
+                </div>
+                <div class="button-foter open-popup">
+                    <button class="light-button">Заказать звонок</button>
+                    <div class="small-button">
+                        <button><img src="img/fb.png" alt=""></button>
+                        <button><img src="img/inst.png" alt=""></button>
+                        <button><img src="img/telegram.png" alt=""></button>
+                        <button><img src="img/vk.png" alt=""></button>
+                        <button><img src="img/you.png" alt=""></button>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>

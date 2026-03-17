@@ -1,0 +1,25 @@
+{% extends 'shopapp/base.html' %}
+{% load cache %}
+{% block title %}
+order user
+{% endblock %}
+
+{% block body %}
+{% if orders%}
+<div>
+    {% cache 300 user_orders owner.id%}
+    {% for order in orders %}
+    <p>Delivery address {{order.delivery_address}}</p>
+    <p>Promocode {{order.promocode}}</p>
+    <h3>Products</h3>
+    {% for product in order.products.all%}
+    <p>{{product.name}}</p>
+    {% endfor %}
+    {% endfor %}
+
+</div>
+    {%endcache%}
+{% else %}
+<h3>NO ORDERS</h3>
+{% endif %}
+{% endblock %}

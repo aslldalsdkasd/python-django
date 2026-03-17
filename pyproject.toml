@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "python-django"
+version = "0.1.0"
+description = ""
+authors = ["Макаров Артём <makarovartem.09@mail.ru>"]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.13.0"
+pillow = ">=12.1.1,<13.0.0"
+django-debug-toolbar = "4.0.0"
+django-filter = "22.1"
+django = "4.2.0"
+djangorestframework = "3.14.0"
+gunicorn = ">=25.1.0,<26.0.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
+

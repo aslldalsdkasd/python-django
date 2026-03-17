@@ -1,0 +1,26 @@
+{% extends 'myauth/base.html'%}
+
+{% block title %}
+{% endblock %}
+
+{% block body %}
+    {% if user %}
+        <div>
+            <p>Username: {{user.username}}</p>
+            <p>Email: {{user.email}}</p>
+            <p>Phone: {{user.phone}}</p>
+            <p>BIO: {{user.bio}}</p>
+            {% if user.profile.avatar %}
+            <img src="{{user.profile.avatar.url}}" alt="{{user.username}}" width="500">
+            {% else %}
+            <p>Avatar not found</p>
+            {% endif %}
+        </div>
+    {% endif %}
+
+<div>
+    {% if user == request.user or request.user.is_staff %}
+    <a href="{% url 'myauth:user-update' user.pk%}"> редактировать </a>
+    {% endif %}
+</div>
+{% endblock %}

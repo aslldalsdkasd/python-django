@@ -1,0 +1,16 @@
+{% extends 'shopapp/base.html'%}
+
+{% block title %}
+UPDATE
+{% endblock %}
+
+{% block body %}
+    <div>
+        <form method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit">UPDATE</button>
+        </form>
+    </div>
+
+{% endblock %}

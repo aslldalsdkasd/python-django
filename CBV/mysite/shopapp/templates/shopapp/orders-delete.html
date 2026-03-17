@@ -1,0 +1,16 @@
+{% extends 'shopapp/base.html'%}
+
+{% block title%}
+delete
+{% endblock %}
+
+{% block body %}
+<h1> YOU SURE? </h1>
+<a href="{% url 'shopapp:orders_list'%}">BACK</a>
+<br>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">delete</button>
+</form>
+
+{% endblock %}

@@ -1,0 +1,4 @@
+id,name,description,price,discount,created_at,archived
+3,Mouse,,5000.00,0,2026-02-19 19:31:16.391907+00:00,True
+2,Apple,,6000.00,0,2026-02-19 19:31:16.384395+00:00,True
+1,Laptop,,3000.00,0,2026-02-19 19:31:16.340301+00:00,True
